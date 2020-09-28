@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>each method</title>
+</head>
+
+<style type="text/css">
+  .button_bg_color ul {}
+
+  .button_bg_color ul li {
+    display: inline-block;
+    list-style: none;
+    padding: 10px 20px;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+  }
+
+  .graph_section {}
+
+  .line {
+    border-bottom: 2px solid #000;
+  }
+
+  .graph_2 ul,
+  .graph_1 ul {
+    display: flex;
+    justify-content: space-evenly;
+    align-content: center;
+    list-style: none;
+  }
+
+  .graph_1 ul {
+    margin: 0;
+  }
+
+  .graph_1 ul li {
+    width: 100px;
+    /*    height: 20px;*/
+    border: 1px solid #000;
+  }
+
+  .graph_section .click_here {
+    background-color: forestgreen;
+    padding: 10px 20px;
+  }
+
+</style>
+
+<body>
+
+  <div class="button_bg_color">
+    <ul>
+      <li class="bg_color" data-image="images/01.jpg" data-color="red">lion</li>
+      <li class="bg_color" data-image="images/01.jpg" data-color="green">Dog</li>
+      <li class="bg_color" data-image="images/01.jpg" data-color="black">Cat</li>
+      <li class="bg_color" data-image="images/01.jpg" data-color="#022469">Cow</li>
+      <li class="bg_color" data-image="images/01.jpg" data-color="#6E0D29">parrot</li>
+      <li class="bg_color" data-image="images/01.jpg" data-color="#CF0061">Eagle</li>
+      <li class="bg_color" data-image="images/01.jpg" data-color="#1C0D6E">Crocodile</li>
+    </ul>
+
+    <div class="print-here">
+
+    </div>
+  </div>
+
+  <div class="graph_section">
+
+    <div class="graph_1">
+      <ul>
+        <li data-color="red" data-height="200px">A</li>
+        <li data-color="green" data-height="300px">B</li>
+        <li data-color="black" data-height="500px">C</li>
+        <li data-color="#022469" data-height="100px">D</li>
+        <li data-color="#6E0D29" data-height="250px">E</li>
+        <li data-color="#CF0061" data-height="600px">F</li>
+        <li data-color="#1C0D6E" data-height="700px">G</li>
+      </ul>
+    </div>
+    <div class="line"></div>
+    <div class="graph_2">
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+      </ul>
+    </div>
+
+    <button class="click_here">Click Here</button>
+
+  </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+
+      // $('li').each(function(a, b){
+      // 	alert(a + " : " + $(b).text());
+      // });
+
+      $('.button_bg_color ul li').each(function(ind, elem) {
+        var getText = $(this).text();
+        console.log(ind, elem);
+        $(".print-here").append('<p>' + getText + '</p>');
+      });
+
+      // $(".bg_color").each(function() {
+      // $(this).css({
+      //         'background-image': 'url(' + $(this).attr('data-image') + ')'
+      //       });
+      //  });
+
+      $(".bg_color").each(function() {
+        $(this).css({
+          'background-color': $(this).attr('data-color')
+        });
+      });
+
+      $(".graph_1 ul li").each(function() {
+        var GraphBgColor = $(this).attr('data-color');
+        $(this).css({
+          'background-color': GraphBgColor
+        });
+      });
+
+      //      var GraphHeight = $(".graph_1 ul li").attr('data-height');
+      $(".click_here").click(function() {
+        $(".graph_1 ul li").animate({
+          height: $(".graph_1 ul li").attr('data-height'),
+        });
+      });
+
+
+    });
+
+  </script>
+
+</body>
+
+</html>
