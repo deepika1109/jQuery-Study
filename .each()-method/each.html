@@ -70,13 +70,13 @@
 
     <div class="graph_1">
       <ul>
-        <li data-color="red" data-height="200px">A</li>
-        <li data-color="green" data-height="300px">B</li>
-        <li data-color="black" data-height="500px">C</li>
-        <li data-color="#022469" data-height="100px">D</li>
-        <li data-color="#6E0D29" data-height="250px">E</li>
-        <li data-color="#CF0061" data-height="600px">F</li>
-        <li data-color="#1C0D6E" data-height="700px">G</li>
+        <li class="GH" data-color="red" data-height="500px">A</li>
+        <li class="GH" data-color="green" data-height="300px">B</li>
+        <li class="GH" data-color="pink" data-height="500px">C</li>
+        <li class="GH" data-color="#022469" data-height="100px">D</li>
+        <li class="GH" data-color="#6E0D29" data-height="250px">E</li>
+        <li class="GH" data-color="#CF0061" data-height="600px">F</li>
+        <li class="GH" data-color="#1C0D6E" data-height="700px">G</li>
       </ul>
     </div>
     <div class="line"></div>
@@ -123,18 +123,22 @@
         });
       });
 
-      $(".graph_1 ul li").each(function() {
+
+      $(".graph_1 ul li.GH").each(function() {
         var GraphBgColor = $(this).attr('data-color');
         $(this).css({
-          'background-color': GraphBgColor
+          'background-color': GraphBgColor,
+          'height': GraphHeight,
         });
       });
 
-      //      var GraphHeight = $(".graph_1 ul li").attr('data-height');
+
+      var GraphHeight = $(".graph_1 ul li.GH").attr('data-height');
       $(".click_here").click(function() {
-        $(".graph_1 ul li").animate({
-          height: $(".graph_1 ul li").attr('data-height'),
+        $(".graph_1 ul li.GH").animate({
+          height: GraphHeight,
         });
+        //        $(".graph_1 ul li.GH").height($(".graph_1 ul li.GH").attr('data-height'));
       });
 
 
