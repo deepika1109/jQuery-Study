@@ -17,7 +17,11 @@
     cursor: pointer;
   }
 
-  .graph_section {}
+  .graph_section {
+    margin-top: 50vh;
+    margin-bottom: 50vh;
+    background-color: #aaa;
+  }
 
   .line {
     border-bottom: 2px solid #000;
@@ -33,12 +37,22 @@
 
   .graph_1 ul {
     margin: 0;
+    display: flex;
+    align-items: flex-end;
+    height: 400px;
   }
 
   .graph_1 ul li {
     width: 100px;
     /*    height: 20px;*/
     border: 1px solid #000;
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: all 1s ease-out;
+  }
+
+ .graph_1 ul li.scale_full{
+    transform: scaleY(1);
   }
 
   .graph_section .click_here {
@@ -49,6 +63,7 @@
 </style>
 
 <body>
+  <section style="height: 200vh; background-color: green;"></section>
 
   <div class="button_bg_color">
     <ul>
@@ -70,13 +85,13 @@
 
     <div class="graph_1">
       <ul>
-        <li class="GH" data-color="red" data-height="500px">A</li>
-        <li class="GH" data-color="green" data-height="300px">B</li>
-        <li class="GH" data-color="pink" data-height="500px">C</li>
-        <li class="GH" data-color="#022469" data-height="100px">D</li>
-        <li class="GH" data-color="#6E0D29" data-height="250px">E</li>
-        <li class="GH" data-color="#CF0061" data-height="600px">F</li>
-        <li class="GH" data-color="#1C0D6E" data-height="700px">G</li>
+        <li class="GH" data-color="red" data-height-percent="50">A</li>
+        <li class="GH" data-color="green" data-height-percent="30">B</li>
+        <li class="GH" data-color="pink" data-height-percent="50">C</li>
+        <li class="GH" data-color="#022469" data-height-percent="10">D</li>
+        <li class="GH" data-color="#6E0D29" data-height-percent="20">E</li>
+        <li class="GH" data-color="#CF0061" data-height-percent="60">F</li>
+        <li class="GH" data-color="#1C0D6E" data-height-percent="70">G</li>
       </ul>
     </div>
     <div class="line"></div>
@@ -105,11 +120,11 @@
       // 	alert(a + " : " + $(b).text());
       // });
 
-      $('.button_bg_color ul li').each(function(ind, elem) {
-        var getText = $(this).text();
-        console.log(ind, elem);
-        $(".print-here").append('<p>' + getText + '</p>');
-      });
+      // $('.button_bg_color ul li').each(function(ind, elem) {
+      //   var getText = $(this).text();
+      //   console.log(ind, elem);
+      //   $(".print-here").append('<p>' + getText + '</p>');
+      // });
 
       // $(".bg_color").each(function() {
       // $(this).css({
@@ -117,28 +132,42 @@
       //       });
       //  });
 
-      $(".bg_color").each(function() {
-        $(this).css({
-          'background-color': $(this).attr('data-color')
-        });
-      });
+      // $(".bg_color").each(function() {
+      //   $(this).css({
+      //     'background-color': $(this).attr('data-color')
+      //   });
+      // });
 
 
       $(".graph_1 ul li.GH").each(function() {
         var GraphBgColor = $(this).attr('data-color');
+        var getHeight = $(this).attr('data-height-percent');
         $(this).css({
           'background-color': GraphBgColor,
-          'height': GraphHeight,
+          'height':getHeight + '%'
         });
       });
 
 
-      var GraphHeight = $(".graph_1 ul li.GH").attr('data-height');
+      var winH = $(window).outerHeight();
+
+      var graphSectionTop = $('.graph_section').offset().top - winH / 2;
+      $(window).on('scroll',function(){
+        var getScrollPos =  $(window).scrollTop();
+        console.log(getScrollPos);
+        console.log(graphSectionTop);
+        if(getScrollPos > graphSectionTop){
+          
+          $(".graph_1 .GH").addClass('scale_full')
+        }else{
+          $(".graph_1 .GH").removeClass('scale_full')
+        }
+      })
+
+
+    
       $(".click_here").click(function() {
-        $(".graph_1 ul li.GH").animate({
-          height: GraphHeight,
-        });
-        //        $(".graph_1 ul li.GH").height($(".graph_1 ul li.GH").attr('data-height'));
+        
       });
 
 

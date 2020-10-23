@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Array value  in html</title>
+</head>
+<body>
+<div id="result"></div>
+</body>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+	
+var myArray = [
+        { "id" : "1", "Name" : "Angha", "designation" : "Content Writter" }, 
+        { "id" : "2", "Name" : "Shital", "designation" : "General Manager" }, 
+        { "id" : "3", "Name" : "Pooja", "designation" : "H.R. manager" }, 
+        { "id" : "4", "Name" : "Pranali", "designation" : "Internet Marketing Head" }
+      ];
+
+// var myArray = ["Apple", "Banana", "Orange", "Mango", "Pineapple"];
+   
+     
+      $.each(myArray, function(index, value) {
+          // $("#result").append(index + ": " + value + '<br>');
+          $("#result").append(value.id +": "+ value.Name + " = " + value.designation + "<br>");
+
+          console.log(value.id +": "+ value.Name + " = " + value.designation + "<br>");
+      });  
+
+</script>
+</html>
